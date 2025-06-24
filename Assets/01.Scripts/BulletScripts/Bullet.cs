@@ -13,11 +13,12 @@ public class Bullet : MonoBehaviour
     public float damage = 10f;    // 탄환 대미지
     public float lifetime = 3f;      // 탄환이 존재할 시간 (초)
 
-    private Vector2 direction;
-    private float speed;
+    public Vector2 direction;
+    public float speed = 5f;
 
     // 월드 경계 값 (필요에 따라 조정)
     public float boundary = 30f;
+
 
     // Setup을 통해 발사 방향과 속도를 설정 (방향은 항상 normalized)
     public void Setup(Vector2 dir, float spd)
@@ -26,7 +27,7 @@ public class Bullet : MonoBehaviour
         speed = spd;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         // 탄환 존재시간이 지난 후 파괴되도록 설정
         if (lifetime > 0)
@@ -41,7 +42,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         // 움직임 업데이트
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
@@ -85,5 +86,4 @@ public class Bullet : MonoBehaviour
             }
         }
     }
-
 }

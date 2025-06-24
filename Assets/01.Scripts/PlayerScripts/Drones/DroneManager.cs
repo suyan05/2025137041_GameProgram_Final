@@ -14,7 +14,7 @@ public class DroneManager : MonoBehaviour
     public float attackInterval = 2f;
     public float bulletSpeed = 10f;
 
-    public BulletManager bulletManager;  // 필요 시 드론이 BulletManager를 사용할 수 있도록
+    //public BulletManager bulletManager;  // 필요 시 드론이 BulletManager를 사용할 수 있도록
 
     // 현재 생성된 드론들을 보관하는 리스트
     private List<DroneUnit> activeDrones = new List<DroneUnit>();

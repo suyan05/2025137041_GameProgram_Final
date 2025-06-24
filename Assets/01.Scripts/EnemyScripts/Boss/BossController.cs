@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum BossPattern
+/*public enum BossPattern
 {
     Initial,    // 초기 패턴
     Enhanced,   // 강화 패턴
@@ -380,4 +380,4 @@ public class BossController : MonoBehaviour, IDamageable
 
     }
 
-}
+}*/
