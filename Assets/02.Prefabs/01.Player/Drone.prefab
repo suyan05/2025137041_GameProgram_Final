@@ -58,7 +58,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 168980788223089827}
@@ -77,14 +77,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b245873b33ce54c9f430dc46424064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1994301076200808996, guid: 243692e182691464288f24dc177026d8, type: 3}
   orbitRadius: 2
   orbitSpeed: 90
   followSpeed: 5
   attackInterval: 2
   bulletSpeed: 10
   firePoint: {fileID: 3163243730489503178}
-  droneBulletPrefab: {fileID: 5019926647319379192, guid: 5f3b2aa63201cb74f83e29dc689296a5, type: 3}
+  droneBulletPrefab: {fileID: 5019926647319379192, guid: 24d467c0536b5364aa70911074a6765c, type: 3}
   offsetAngle: 0
 --- !u!1 &6198537114926628504
 GameObject:
@@ -159,7 +159,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d5f697c999643441bb417d834c597de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 5111417469034011074}
   - component: {fileID: 4357224491170712767}
   - component: {fileID: 8049830569811872765}
-  - component: {fileID: 8253743516266789935}
-  - component: {fileID: -5423809841243619526}
+  - component: {fileID: 466753491950034607}
   m_Layer: 8
   m_Name: 05.RotationBullet
   m_TagString: EBullet
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9622642, g: 0.17702031, b: 0.17702031, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 762a9530a0b13e347a9243ca9ffeb514, type: 3}
+  m_Color: {r: 0.3480331, g: 0.65778697, b: 0.9339623, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -150,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8253743516266789935
+--- !u!114 &466753491950034607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,24 +158,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5019926647319379192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e34b4c8d6930c341964e6ae9e222269, type: 3}
+  m_Script: {fileID: 11500000, guid: 162bfa0c14a959943ac24053f8d2bb6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0
-  lifetime: 5
---- !u!114 &-5423809841243619526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5019926647319379192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 518c618b4b219ba4f96554d7996c9e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletType: 1
+  bulletType: 0
   damage: 10
   lifetime: 3
+  direction: {x: 0, y: 0}
+  speed: 5
   boundary: 30
+  center: {fileID: 2830350633429793877, guid: c45067039b0e6574db6a2ef1f6a793f5, type: 3}
+  orbitRadius: 1.5
+  orbitSpeed: 90
+  radiusGrowthSpeed: 0
+  startAngle: 0

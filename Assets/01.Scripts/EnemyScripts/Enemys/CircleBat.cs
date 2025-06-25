@@ -14,6 +14,7 @@ public class CircleBat : MonoBehaviour, IActivatablePattern
     {
         center = transform.position;
         angle = Random.Range(0f, 360f);
+        StartPattern();
     }
 
     void Update()

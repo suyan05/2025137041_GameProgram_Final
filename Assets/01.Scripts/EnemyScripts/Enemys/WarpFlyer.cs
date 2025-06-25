@@ -10,6 +10,11 @@ public class WarpFlyer : MonoBehaviour, IActivatablePattern
     private float timer = 0f;
     private bool isActive = false;
 
+    private void Start()
+    {
+        StartPattern();
+    }
+
     void Update()
     {
         if (!isActive) return;

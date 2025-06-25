@@ -15,6 +15,7 @@ public class ZigDrone : MonoBehaviour, IActivatablePattern
     {
         startPos = transform.position;
         timeOffset = Random.Range(0f, 100f); // 패턴 다양화
+        StartPattern();
     }
 
     void Update()

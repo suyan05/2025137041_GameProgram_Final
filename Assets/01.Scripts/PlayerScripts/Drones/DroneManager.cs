@@ -19,6 +19,24 @@ public class DroneManager : MonoBehaviour
     // 현재 생성된 드론들을 보관하는 리스트
     private List<DroneUnit> activeDrones = new List<DroneUnit>();
 
+    void Awake()
+    {
+        // 자동으로 플레이어 찾기 시도 (태그 사용)
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+            else
+            {
+                Debug.LogWarning("[DroneManager] Player를 찾을 수 없습니다.");
+            }
+        }
+    }
+
+
     void Start()
     {
         SpawnDrones(droneCount);
@@ -26,6 +44,8 @@ public class DroneManager : MonoBehaviour
 
     private void Update()
     {
+        if (player == null) return;
+
         // 드론 개수를 키우거나 줄이는 입력 처리
         if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus))
         {
@@ -40,6 +60,8 @@ public class DroneManager : MonoBehaviour
     // droneCount만큼 드론을 생성하고, 플레이어 주위에 원형으로 균등하게 배치합니다.
     void SpawnDrones(int count)
     {
+        if (player == null) return;
+
         // 기존에 생성된 드론 모두 제거
         foreach (var drone in activeDrones)
         {

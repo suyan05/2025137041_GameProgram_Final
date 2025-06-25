@@ -4,36 +4,49 @@ using System.Collections;
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public float maxHealth = 100f;
-    private float currentHealth;
+    public float CurrentHealth;
 
     [Header("무적 시간 설정")]
-    public float invincibilityDuration = 2f;     // 무적 지속 시간 (초)
-    public float flickerInterval = 0.1f;         // 깜빡임 간격 (초)
+    public float invincibilityDuration = 2f;
+    public float flickerInterval = 0.1f;
     private bool isInvincible = false;
     private SpriteRenderer spriteRenderer;
 
+    [Header("생존 점수 설정")]
+    public int scorePerSecond = 10;
+    private float survivalTimer = 0f;
+
+    private bool isAlive = true;
+
     void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        // 무적 상태 타이머는 코루틴 내부에서 제어하므로 별도 업데이트 코드는 없어도 됨.
+        if (!isAlive || !GameManager.Instance) return;
+
+        survivalTimer += Time.deltaTime;
+        if (survivalTimer >= 1f)
+        {
+            int seconds = Mathf.FloorToInt(survivalTimer);
+            GameManager.Instance.AddScore(seconds * scorePerSecond);
+            survivalTimer -= seconds;
+        }
     }
 
     public void TakeDamage(float amount)
     {
-        if (isInvincible)
-            return;
+        if (isInvincible || !isAlive) return;
 
-        currentHealth -= amount;
-        Debug.Log($"플레이어 체력: {currentHealth}");
+        CurrentHealth -= amount;
+        Debug.Log($"플레이어 체력: {CurrentHealth}");
 
-        if (currentHealth <= 0f)
+        if (CurrentHealth <= 0f)
         {
-            currentHealth = 0;
+            CurrentHealth = 0;
             Die();
         }
         else
@@ -56,10 +69,21 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         isInvincible = false;
     }
 
+
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHealth += amount;
+        CurrentHealth = maxHealth;
+    }
+
     void Die()
     {
         Debug.Log("플레이어 사망!");
-        // 사망 효과, 씬 전환 등 추가 가능
+        isAlive = false;
+
+        if (GameOverManager.Instance != null)
+            GameOverManager.Instance.GameOver();
+
         Destroy(gameObject);
     }
 }

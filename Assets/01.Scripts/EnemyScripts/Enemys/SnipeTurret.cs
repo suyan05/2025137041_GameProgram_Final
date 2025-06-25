@@ -1,32 +1,67 @@
 using UnityEngine;
 
-public class SnipeTurret : MonoBehaviour, IActivatablePattern
+public class DualFireTurret : MonoBehaviour
 {
-    public Transform player;
-    public MonoBehaviour shooter;
-    public float rotationSpeed = 360f;
+    public Transform[] firePoints;
+    public GameObject bulletPrefab;
+    public float fireInterval = 2f;
+    public float bulletSpeed = 6f;
+    public float delayBetweenShots = 0.2f;
 
-    private bool isActive = false;
+    private Transform target;
+    private float fireTimer = 0f;
+    private bool canShoot = false; //2초 대기 후 true로 전환
+
+    void Start()
+    {
+        GameObject obj = GameObject.FindWithTag("Player");
+        if (obj != null)
+            target = obj.transform;
+
+        StartCoroutine(InitialDelay());
+    }
+
+    System.Collections.IEnumerator InitialDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        canShoot = true;
+        fireTimer = fireInterval; // 바로 쏘기 위해 타이머도 초기화
+    }
 
     void Update()
     {
-        if (!isActive || player == null) return;
+        if (!canShoot || target == null || firePoints.Length < 2) return;
 
-        Vector3 dir = (player.position - transform.position).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
-        Quaternion targetRot = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        fireTimer += Time.deltaTime;
+        if (fireTimer >= fireInterval)
+        {
+            fireTimer = 0f;
+            StartCoroutine(FireWithDelay());
+        }
+
+        // 회전
+        Vector2 dir = target.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
     }
 
-    public void StartPattern()
+    System.Collections.IEnumerator FireWithDelay()
     {
-        isActive = true;
-        if (shooter is IActivatablePattern p) p.StartPattern();
+        FireFromPoint(firePoints[0]);
+        yield return new WaitForSeconds(delayBetweenShots);
+        FireFromPoint(firePoints[1]);
     }
 
-    public void StopPattern()
+    void FireFromPoint(Transform point)
     {
-        isActive = false;
-        if (shooter is IActivatablePattern p) p.StopPattern();
+        if (bulletPrefab == null || point == null) return;
+
+        GameObject bullet = Instantiate(bulletPrefab, point.position, point.rotation);
+        Bullet b = bullet.GetComponent<Bullet>();
+        if (b != null)
+        {
+            Vector2 dir = (target.position - point.position).normalized;
+            b.Setup(dir, -bulletSpeed);
+        }
     }
 }

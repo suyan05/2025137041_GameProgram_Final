@@ -56,32 +56,38 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (bulletType == BulletType.PlayerBullet && collision.CompareTag("Boss"))
+        if (bulletType == BulletType.PlayerBullet)
         {
-            // 부모 객체에서 BossController 검색
-            BossArm bossArm = collision.GetComponent<BossArm>();
-            if (bossArm != null)
+            //보스 파트 피격 처리
+            if (collision.CompareTag("Boss"))
             {
-                bossArm.TakeDamage(damage);
-            }
-            
-            BossCore bossCore = collision.GetComponent<BossCore>();
-            if (bossCore != null)
-            {
-                bossCore.TakeDamage(damage);
-            }
+                BossArm bossArm = collision.GetComponent<BossArm>();
+                if (bossArm != null)
+                    bossArm.TakeDamage(damage);
 
-            Destroy(gameObject);
+                BossCore bossCore = collision.GetComponent<BossCore>();
+                if (bossCore != null)
+                    bossCore.TakeDamage(damage);
+
+                Destroy(gameObject);
+            }
+            //일반 적 피격 처리
+            else if (collision.CompareTag("Enemy"))
+            {
+                EnemyStatus enemy = collision.GetComponent<EnemyStatus>();
+                if (enemy != null)
+                    enemy.TakeDamage(damage);
+
+                Destroy(gameObject);
+            }
         }
-
         else if (bulletType == BulletType.EnemyBullet && collision.CompareTag("Player"))
         {
-            // 적 탄환이 플레이어에 맞았을 때 플레이어 체력 감소
+            //플레이어 피격 처리
             PlayerHealth player = collision.GetComponent<PlayerHealth>();
             if (player != null)
             {
                 player.TakeDamage(damage);
-                // 탄환 제거
                 Destroy(gameObject);
             }
         }

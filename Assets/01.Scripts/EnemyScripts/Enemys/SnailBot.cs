@@ -6,6 +6,11 @@ public class SnailBot : MonoBehaviour, IActivatablePattern
     public float moveSpeed = 1f;
     private bool isActive = false;
 
+    private void Start()
+    {
+        StartPattern();
+    }
+
     void Update()
     {
         if (!isActive) return;

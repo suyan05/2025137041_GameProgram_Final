@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4357224491170712767}
   - component: {fileID: 8049830569811872765}
   - component: {fileID: 5826832100770231934}
-  - component: {fileID: -5376160728938107825}
+  - component: {fileID: 8895563288783176894}
   m_Layer: 8
   m_Name: 04.ReflectingBullet
   m_TagString: EBullet
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9622642, g: 0.17702031, b: 0.17702031, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 40c6b12207a2f7b4d89cebd87c303801, type: 3}
+  m_Color: {r: 0.49982202, g: 0.6536243, b: 0.9056604, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -162,21 +162,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0bff3e69fee67498a69a0080620161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletType: 1
+  damage: 10
+  lifetime: 3
+  direction: {x: 0, y: 0}
   speed: 0
+  boundary: 30
   maxBounces: 3
---- !u!114 &-5376160728938107825
-MonoBehaviour:
+--- !u!58 &8895563288783176894
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5019926647319379192}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 518c618b4b219ba4f96554d7996c9e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletType: 1
-  damage: 10
-  lifetime: 3
-  boundary: 30
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
