@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public void ResetData()
     {
-        score = 0;
         highScore = 0;
         totalCoin = 0;
         PlayerPrefs.DeleteKey("Score");
@@ -57,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     void LoadData()
     {
-        score = 0;
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         totalCoin = PlayerPrefs.GetInt("TotalCoin", 0);
     }
